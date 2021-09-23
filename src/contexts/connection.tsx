@@ -12,14 +12,14 @@ import { notify } from "./../utils/notifications";
 import { ExplorerLink } from "../components/ExplorerLink";
 import { setProgramIds } from "../utils/ids";
 import { cache, getMultipleAccounts, MintParser } from "./accounts";
-import { TokenListProvider, ENV as ChainID, TokenInfo } from "@solana/spl-token-registry";
+import {
+  TokenListProvider,
+  ENV as ChainID,
+  TokenInfo,
+} from "@solana/spl-token-registry";
 import { WalletAdapter } from "@solana/wallet-adapter-base";
 
-export type ENV =
-  | "mainnet-beta"
-  | "testnet"
-  | "devnet"
-  | "localnet";
+export type ENV = "mainnet-beta" | "testnet" | "devnet" | "localnet";
 
 export const ENDPOINTS = [
   {
@@ -82,12 +82,14 @@ export function ConnectionProvider({ children = undefined as any }) {
     DEFAULT_SLIPPAGE.toString()
   );
 
-  const connection = useMemo(() => new Connection(endpoint, "recent"), [
-    endpoint,
-  ]);
-  const sendConnection = useMemo(() => new Connection(endpoint, "recent"), [
-    endpoint,
-  ]);
+  const connection = useMemo(
+    () => new Connection(endpoint, "recent"),
+    [endpoint]
+  );
+  const sendConnection = useMemo(
+    () => new Connection(endpoint, "recent"),
+    [endpoint]
+  );
 
   const chain =
     ENDPOINTS.find((end) => end.endpoint === endpoint) || ENDPOINTS[0];
@@ -109,15 +111,19 @@ export function ConnectionProvider({ children = undefined as any }) {
         return map;
       }, new Map<string, TokenInfo>());
 
-      const accounts = await getMultipleAccounts(connection, [...knownMints.keys()], 'single');
+      const accounts = await getMultipleAccounts(
+        connection,
+        [...knownMints.keys()],
+        "single"
+      );
       accounts.keys.forEach((key, index) => {
         const account = accounts.array[index];
-        if(!account) {
+        if (!account) {
           return;
         }
 
         cache.add(new PublicKey(key), account, MintParser);
-      })
+      });
 
       setTokenMap(knownMints);
       setTokens(list);

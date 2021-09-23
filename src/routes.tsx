@@ -6,7 +6,7 @@ import { AccountsProvider } from "./contexts/accounts";
 import { MarketProvider } from "./contexts/market";
 import { AppLayout } from "./components/Layout";
 
-import {FaucetView, HomeView, MintView} from "./views";
+import { FaucetView, HomeView, MintView } from "./views";
 import {
   getLedgerWallet,
   getMathWallet,
@@ -16,6 +16,7 @@ import {
   getSolongWallet,
   getTorusWallet,
 } from "@solana/wallet-adapter-wallets";
+import { DisplayView } from "./views/display";
 
 export function Routes() {
   const wallets = useMemo(
@@ -48,6 +49,7 @@ export function Routes() {
                   <Route exact path="/" component={() => <HomeView />} />
                   <Route exact path="/faucet" children={<FaucetView />} />
                   <Route exact path="/mint" children={<MintView />} />
+                  <Route exact path="/display" children={<DisplayView />} />
                 </Switch>
               </AppLayout>
             </MarketProvider>

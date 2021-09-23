@@ -17,16 +17,17 @@ export const ConnectButton = (props: ConnectButtonProps) => {
   const { connected, connect, select, wallet, wallets } = useWallet();
   const { onClick, children, disabled, allowWalletChange, ...rest } = props;
 
-  const handleChangeWalletButtonClick: React.MouseEventHandler<HTMLElement> = useCallback(
-    (event) => {
-      if (connected) {
-        onClick?.(event);
-        return;
-      }
-      setVisible(true);
-    },
-    [setVisible, onClick, connected]
-  );
+  const handleChangeWalletButtonClick: React.MouseEventHandler<HTMLElement> =
+    useCallback(
+      (event) => {
+        if (connected) {
+          onClick?.(event);
+          return;
+        }
+        setVisible(true);
+      },
+      [setVisible, onClick, connected]
+    );
 
   // only show if wallet selected or user connected
   const menu = (

@@ -36,10 +36,10 @@ export function useUserBalance(
     );
   }, [accounts]);
 
-  const balance = useMemo(() => fromLamports(balanceLamports, mintInfo), [
-    mintInfo,
-    balanceLamports,
-  ]);
+  const balance = useMemo(
+    () => fromLamports(balanceLamports, mintInfo),
+    [mintInfo, balanceLamports]
+  );
 
   useEffect(() => {
     const updateBalance = () => {

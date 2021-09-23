@@ -41,9 +41,10 @@ export function MarketProvider({ children = null as any }) {
   const [marketMints, setMarketMints] = useState<string[]>([]);
   const { userAccounts } = useUserAccounts();
 
-  const connection = useMemo(() => new Connection(endpoint, "recent"), [
-    endpoint,
-  ]);
+  const connection = useMemo(
+    () => new Connection(endpoint, "recent"),
+    [endpoint]
+  );
 
   const marketByMint = useMemo(() => {
     return [...new Set(marketMints).values()].reduce((acc, key) => {
@@ -54,10 +55,11 @@ export function MarketProvider({ children = null as any }) {
       );
 
       const marketAddress = MINT_TO_MARKET[mintAddress];
-      const marketInfo = MARKETS.filter(m => !m.deprecated).find(
-        (m) => m.name === `${SERUM_TOKEN?.name}/USDC` || 
-               m.name === `${SERUM_TOKEN?.name}/USDT` || 
-               m.address.toBase58() === marketAddress
+      const marketInfo = MARKETS.filter((m) => !m.deprecated).find(
+        (m) =>
+          m.name === `${SERUM_TOKEN?.name}/USDC` ||
+          m.name === `${SERUM_TOKEN?.name}/USDT` ||
+          m.address.toBase58() === marketAddress
       );
 
       if (marketInfo) {
@@ -207,7 +209,7 @@ export function MarketProvider({ children = null as any }) {
   );
 
   useEffect(() => {
-    precacheMarkets(userAccounts.map(a => a.info.mint.toBase58()));
+    precacheMarkets(userAccounts.map((a) => a.info.mint.toBase58()));
   }, [userAccounts, precacheMarkets]);
 
   return (
