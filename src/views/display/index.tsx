@@ -18,7 +18,7 @@ export const DisplayView = () => {
       }
       const img = await getNFTImage(connection, publicKey);
 
-      console.log("NFT displayed");
+      console.log(`NFT Image:${img}`);
       //TODO Mint nft
       // notify({
       //     message: LABELS.NFT_MINTED,
