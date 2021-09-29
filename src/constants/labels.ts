@@ -13,7 +13,9 @@ export const LABELS = {
   ACCOUNT_FUNDED: "Account funded.",
   NFT_MINTED: "NFT minted.",
   AIRDROP_FAIL:
-    "Airdrop failed, please check you're not on mainnet or your localnet is running.",
+      "Airdrop failed, please check you're not on mainnet or your localnet is running.",
+  DISPLAY_FAIL:
+    "Display failed.",
   MINT_FAIL:
     "Mint failed, please check you're not on mainnet or your localnet is running.",
   REPAY_QUESTION: "How much would you like to repay?",
