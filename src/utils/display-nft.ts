@@ -6,6 +6,7 @@ import {
 } from "@solana/web3.js";
 import {Token, TOKEN_PROGRAM_ID} from "@solana/spl-token";
 import {decodeMetadata} from "./metaplex-utils";
+import {MetaplexNft} from "../types/MetaplexNft";
 
 const TEST_MINT = "DqGGFuiWRiJ6Mim1qafLWn6FZzBGGcSTyFFSJ8RpuqE8";
 const METADATA_PUBKEY = new PublicKey(
@@ -15,7 +16,7 @@ const METADATA_PUBKEY = new PublicKey(
 export async function getNFTImage(
     connection: Connection,
     publicKey: PublicKey
-) {
+):Promise<MetaplexNft> {
     const programId = {
         programId: TOKEN_PROGRAM_ID,
     };
@@ -41,8 +42,9 @@ export async function getNFTImage(
     const mint = parsedAccountData.parsed.info.mint
 
     console.log(`mint : ${JSON.stringify(mint)}`);
-    const nft = await getNft(mint);
-    return nft.image;
+    const nft:MetaplexNft = await getNft(mint);
+    console.log(JSON.stringify(nft, null, 2))
+    return nft;
 }
 
 export async function getNft(mintAddress: string): Promise<any> {
